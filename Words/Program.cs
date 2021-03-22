@@ -78,8 +78,11 @@ namespace Words
 
 
                 InsertParagraph(cells[0], predmet.predmet);
-                //cells[0].InsertParagraph(predmet.predmet);
-                cells[1].InsertParagraph(predmet.razred);
+                InsertParagraph(cells[1], predmet.razred);
+
+                
+                
+                
                 
 
                 bool turnus = firstTurnus;
@@ -105,7 +108,7 @@ namespace Words
                             int broj= brojSati[(int)dayOfWeek-1];
                             if(broj>0)
                             {
-                                cells[i].InsertParagraph(broj.ToString());
+                                InsertParagraph(cells[i],broj.ToString());
                                 sum+=broj;
                             }
                         }
@@ -116,13 +119,13 @@ namespace Words
                         
                     }
                 }
-                cells[^1].InsertParagraph(sum.ToString());
+                InsertParagraph(cells[^1], sum.ToString());
                 grandSum+= sum;
                 rowIndex++;
             }
             var lastRow = table.Rows[^2];
             var lastCell = lastRow.Cells[^1];
-            lastCell.InsertParagraph(grandSum.ToString());
+            InsertParagraph(lastCell, grandSum.ToString());
             
         }
 
@@ -138,7 +141,7 @@ namespace Words
             paragraph.SpacingBefore(0.2);
             var textFormatting = new Formatting
             {
-                Size=5
+                Size=8
             };
             paragraph.InsertText(text,false,textFormatting);
 
@@ -152,7 +155,7 @@ namespace Words
     {
         static void Main(string[] args)
         {
-            var words = new Words("./nastava.docx",2, true);
+            var words = new Words("./nastava.docx",2, false);
             words.Load();
             words.Write();
             words.SaveAs("./jaje.docx");
